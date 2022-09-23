@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./Navbar";
+import "./App.css";
+import Reports from "./Reports";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-function App() {
+const App = () => {
+  const [employees, setEmployees] = useState();
+  const [trends, setTrends] = useState();
+
+  useEffect(() => {
+    async function getEmployees() {
+      const employees = await axios.get("http://localhost:8000/employees");
+      setEmployees(employees.data);
+    }
+
+    async function getTrends() {
+      const trends = await axios.get("http://localhost:8000/trends");
+      setTrends(trends.data);
+    }
+    getTrends();
+    getEmployees();
+  }, []);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Navbar />
+      <Reports employees={employees} trends={trends} />
     </div>
   );
-}
+};
 
 export default App;
