@@ -7,10 +7,10 @@ const EmployeesTable = ({ employees }) => {
     <Table responsive striped bordered hover variant="light" size="sm">
       <thead>
         <tr>
-          <th style={{ padding: "10px 30px" }}>Employee</th>
-          <th style={{ padding: "10px 30px" }}>Last login</th>
-          <th style={{ padding: "10px 30px" }}>Department</th>
-          <th style={{ padding: "10px 30px" }}>Status</th>
+          <th className="table-head">Employee</th>
+          <th className="table-head">Last login</th>
+          <th className="table-head">Department</th>
+          <th className="table-head">Status</th>
           <th> </th>
         </tr>
       </thead>
@@ -19,13 +19,19 @@ const EmployeesTable = ({ employees }) => {
           <tbody className="employees-details" key={employee.id}>
             <tr>
               <td>
-                <img src="" alt="" />
-                <div
-                  className="employee-handle"
-                  style={{ padding: "10px 20px", lineHeight: "3px" }}
-                >
-                  <h6 style={{ fontSize: "13px" }}>{employee.name}</h6>
-                  <p style={{ opacity: "0.7" }}>{employee.email}</p>
+                <div className="person">
+                  <ion-icon
+                    style={{
+                      fontSize: "25px",
+                      position: "relative",
+                      bottom: "5px",
+                    }}
+                    name="person-circle-outline"
+                  ></ion-icon>
+                  <div className="employee-handle">
+                    <h6 style={{ fontSize: "13px" }}>{employee.name}</h6>
+                    <p style={{ opacity: "0.7" }}>{employee.email}</p>
+                  </div>
                 </div>
               </td>
               <td style={{ padding: "30px", lineHeight: "3px" }}>
@@ -39,7 +45,11 @@ const EmployeesTable = ({ employees }) => {
               </td>
               {employee.status === "Active" ? (
                 <td
-                  style={{ color: "green", padding: "30px", fontWeight: "600" }}
+                  style={{
+                    color: "#3CC13B",
+                    padding: "30px",
+                    fontWeight: "600",
+                  }}
                 >
                   {employee.status}
                 </td>
@@ -50,7 +60,9 @@ const EmployeesTable = ({ employees }) => {
                   {employee.status}
                 </td>
               )}
-              <td style={{ padding: "30px" }}>^</td>
+              <td style={{ padding: "30px", fontWeight: "600" }}>
+                <ion-icon name="chevron-down-outline"></ion-icon>
+              </td>
             </tr>
           </tbody>
         ))}
